@@ -1,5 +1,4 @@
 #include "hash.h"
-#include <cstdint>
 
 inline uint32_t rotl32(uint32_t v, uint8_t n)
 {
