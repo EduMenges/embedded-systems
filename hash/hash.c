@@ -1,17 +1,14 @@
 #include "hash.h"
 #include <cstdint>
 
-namespace
-{
-constexpr uint32_t rotl32(uint32_t v, uint8_t n)
+inline uint32_t rotl32(uint32_t v, uint8_t n)
 {
     return (v << n) | (v >> ((-n) & 31));
 }
 
-constexpr uint32_t rotr32(uint32_t v, uint8_t n)
+inline uint32_t rotr32(uint32_t v, uint8_t n)
 {
     return (v >> n) | (v << ((-n) & 31));
-}
 }
 
 uint32_t hash(const void *data, size_t len, uint32_t seed)
@@ -19,7 +16,7 @@ uint32_t hash(const void *data, size_t len, uint32_t seed)
     uint32_t h1 = seed ^ 0x3b00;
     uint32_t h2 = rotl32(seed, 15);
 
-    auto p = reinterpret_cast<const uint8_t *>(data);
+    const uint8_t *p = data;
     for (size_t i = 0; i < len; ++i)
     {
         h1 += p[0];

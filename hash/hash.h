@@ -1,5 +1,5 @@
-#include <cstdint>
-#include <cstddef>
+#include <stdint.h>
+#include <stddef.h>
 
 /**
  * @brief Hash using funny-falcon's GoodOAAT hash (https://github.com/rurban/smhasher/blob/master/Hashes.cpp)
@@ -8,4 +8,4 @@
  * @param seed Hash's seed
  * @return uint32_t The hash of data
  */
-uint32_t hash(const void *data, size_t len, uint32_t seed = 0);
+uint32_t hash(const void *data, size_t len, uint32_t seed);
