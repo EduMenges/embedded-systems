@@ -1,11 +1,11 @@
 #include "hash.h"
 
-inline uint32_t rotl32(uint32_t v, uint8_t n)
+static inline uint32_t rotl32(uint32_t v, uint8_t n)
 {
     return (v << n) | (v >> ((-n) & 31));
 }
 
-inline uint32_t rotr32(uint32_t v, uint8_t n)
+static inline uint32_t rotr32(uint32_t v, uint8_t n)
 {
     return (v >> n) | (v << ((-n) & 31));
 }
