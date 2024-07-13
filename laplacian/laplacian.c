@@ -8,11 +8,16 @@ void applyLaplacian(unsigned char src[IMAGE_HEIGHT][IMAGE_WIDTH], int dst[IMAGE_
         { 0,  1, 0}
     };
 
-    for (int i = 1; i < IMAGE_HEIGHT - 1; ++i) {
-        for (int j = 1; j < IMAGE_WIDTH - 1; ++j) {
-            int sum = 0;
-            for (int k = -1; k <= 1; ++k) {
-                for (int l = -1; l <= 1; ++l) {
+    int i, j, k, l, sum;
+    for (i = 1; i < IMAGE_HEIGHT - 1; ++i)
+    {
+        for (j = 1; j < IMAGE_WIDTH - 1; ++j)
+        {
+            sum = 0;
+            for (k = -1; k <= 1; ++k)
+            {
+                for (l = -1; l <= 1; ++l)
+                {
                     sum += src[i + k][j + l] * kernel[k + 1][l + 1];
                 }
             }

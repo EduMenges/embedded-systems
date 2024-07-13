@@ -282,8 +282,11 @@ int main() {
     int dst[IMAGE_HEIGHT][IMAGE_WIDTH] = {0};
 
     // Initialize the source image
-    for (int i = 0; i < IMAGE_HEIGHT; ++i) {
-        for (int j = 0; j < IMAGE_WIDTH; ++j) {
+    int i, j;
+    for (i = 0; i < IMAGE_HEIGHT; ++i)
+    {
+        for (j = 0; j < IMAGE_WIDTH; ++j)
+        {
             src[i][j] = source_image[i][j];
         }
     }
