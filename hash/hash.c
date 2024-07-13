@@ -16,7 +16,8 @@ uint32_t hash(const void *data, size_t len, uint32_t seed)
     uint32_t h2 = rotl32(seed, 15);
 
     const uint8_t *p = data;
-    for (size_t i = 0; i < len; ++i)
+    size_t i;
+    for (i = 0; i < len; ++i)
     {
         h1 += p[0];
         h1 *= 9;
