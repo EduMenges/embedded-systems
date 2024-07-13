@@ -3,15 +3,25 @@
 #include <stddef.h>
 
 #ifndef __cplusplus
-typedef unsigned int bool;
-#define true (1)
-#define false (0)
+typedef unsigned int _bool;
+#define _true (1)
+#define _false (0)
 #endif
+
+#define uint8_t unsigned char
+#define uint16_t unsigned short int
+#define uint32_t unsigned int
+#define uint64_t unsigned long long int
+#define int8_t char
+#define int16_t short int
+#define int32_t int
+#define int64_t long long int
+#define size_t unsigned char
 
 #define typed(name) name##_t
 
 typedef const char *typed(json_string);
-typedef bool typed(json_boolean);
+typedef _bool typed(json_boolean);
 
 typedef union json_number_value_u typed(json_number_value);
 typedef signed long typed(json_number_long);

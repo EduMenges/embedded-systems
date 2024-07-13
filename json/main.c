@@ -29,17 +29,12 @@ const char *read_file(const char *path) {
 }
 
 int main(void) {
-  const char *json = read_file("./reddit.json");
+  const char *json = read_file("..\\multidim_arr.json");
   if (json == NULL) {
     return -1;
   }
 
-  clock_t start, end;
-  start = clock();
   result(json_element) element_result = json_parse(json);
-  end = clock();
-
-  printf("Time taken %fs\n", (double)(end - start) / (double)CLOCKS_PER_SEC);
 
   free((void *)json);
 
