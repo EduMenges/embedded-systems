@@ -1,0 +1,207 @@
+RC51 COMPILER V06.14.12.087,  LAPLACIAN          07/13/24  18:47:01  PAGE  1
+
+QCW(0x00002F32)
+
+DOS RC51 COMPILER V06.14.12.087, COMPILATION OF MODULE LAPLACIAN 
+OBJECT MODULE PLACED IN F:\Micro\laplacian\laplacian.obj
+COMPILER INVOKED BY: QUIET GENERATEDEPFILE OJ(F:\Micro\laplacian\laplacian.obj) 
+            -PIN(C:\Arquivos de programas\Raisonance\Ride\Inc;C:\Arquivos de pro
+            -gramas\Raisonance\Ride\Inc\51) PIN(C:\Arquivos de programas\Raisona
+            -nce\Ride\\C:\Arquivos de programas\Raisonance\Ride\\inc\51) NOAM CD
+            - PR(F:\Micro\laplacian\laplacian.lst) FP(NOFLOAT) IP NOIS UNSIGNEDC
+            -HAR ET(CHAR) PR PL(60) PW(80) OE(1) OT(7,SPEED) RB(0) MAXERR(25) MA
+            -XWAR(25) SM MOD517(NODP8,NOAU) 
+
+stmt level    source
+   1          #include "./laplacian.h"
+   2          
+   3          // Function to apply the Laplacian filter
+   4          void applyLaplacian(unsigned char src[IMAGE_HEIGHT][IMAGE_WIDTH], 
+            -char dst[IMAGE_HEIGHT][IMAGE_WIDTH]) {
+   5   1          static int kernel[3][3] = {
+   6   1              { 0,  1, 0},
+   7   1              { 1, -4, 1},
+   8   1              { 0,  1, 0}
+   9   1          };
+  10   1      
+  11   1          int i, j, k, l, sum;
+  12   1          for (i = 1; i < IMAGE_HEIGHT - 1; ++i)
+  13   1          {
+  14   2              for (j = 1; j < IMAGE_WIDTH - 1; ++j)
+  15   2              {
+  16   3                  sum = 0;
+  17   3                  for (k = -1; k <= 1; ++k)
+  18   3                  {
+  19   4                      for (l = -1; l <= 1; ++l)
+  20   4                      {
+  21   5                          sum += src[i + k][j + l] * kernel[k + 1][l + 1
+            -];
+  22   5                      }
+  23   4                  }
+  24   3                  dst[i][j] = sum;
+  25   3              }
+  26   2          }
+  27   1      }
+  28          
+RC51 COMPILER V06.14.12.087,  LAPLACIAN          07/13/24  18:47:01  PAGE  4
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+            ; FUNCTION _applyLaplacian (BEGIN)
+                                           ; SOURCE LINE # 4 
+0000 8B00    R      MOV    src,R3
+0002 8A00    R      MOV    src+01H,R2
+0004 8900    R      MOV    src+02H,R1
+0006 8D00    R      MOV    dst,R5
+0008 8C00    R      MOV    dst+01H,R4
+000A 8800    R      MOV    dst+02H,R0
+                                           ; SOURCE LINE # 12 
+000C E4             CLR    A
+000D F500    R      MOV    i,A
+000F 750001  R      MOV    i+01H,#001H
+0012         ?FOR4:
+                                           ; SOURCE LINE # 14 
+0012 E4             CLR    A
+0013 F500    R      MOV    j,A
+0015 750001  R      MOV    j+01H,#001H
+0018         ?FOR5:
+                                           ; SOURCE LINE # 16 
+0018 E4             CLR    A
+0019 F500    R      MOV    sum,A
+001B F500    R      MOV    sum+01H,A
+                                           ; SOURCE LINE # 17 
+001D 74FF           MOV    A,#0FFH
+001F F500    R      MOV    k,A
+0021 F500    R      MOV    k+01H,A
+0023         ?FOR6:
+                                           ; SOURCE LINE # 19 
+0023 74FF           MOV    A,#0FFH
+0025 F500    R      MOV    l,A
+0027 F500    R      MOV    l+01H,A
+0029         ?FOR7:
+                                           ; SOURCE LINE # 21 
+0029 E500    R      MOV    A,l+01H
+002B C3             CLR    C
+002C 33             RLC    A
+002D FE             MOV    R6,A
+002E E500    R      MOV    A,k+01H
+0030 75F006         MOV    B,#006H
+0033 A4             MUL    AB
+0034 2400    R      ADD    A,#kernel+08H
+0036 2E             ADD    A,R6
+0037 F8             MOV    R0,A
+0038 8606           MOV    AR6,@R0
+003A 08             INC    R0
+003B 8607           MOV    AR7,@R0
+003D C006           PUSH   AR6
+003F C007           PUSH   AR7
+0041 E500    R      MOV    A,k+01H
+0043 2500    R      ADD    A,i+01H
+0045 FF             MOV    R7,A
+0046 E500    R      MOV    A,k
+0048 3500    R      ADDC   A,i
+004A FE             MOV    R6,A
+004B E4             CLR    A
+004C FC             MOV    R4,A
+004D 7D06           MOV    R5,#006H
+004F 120000  R      LCALL  ?C_IMUL
+RC51 COMPILER V06.14.12.087,  LAPLACIAN          07/13/24  18:47:01  PAGE  2
+
+0052 E500    R      MOV    A,src+02H
+0054 2F             ADD    A,R7
+0055 F9             MOV    R1,A
+0056 E500    R      MOV    A,src+01H
+0058 3E             ADDC   A,R6
+0059 AB00    R      MOV    R3,src
+005B FA             MOV    R2,A
+005C E500    R      MOV    A,l+01H
+005E 2500    R      ADD    A,j+01H
+0060 758300         MOV    DPH,#00000H
+0063 F582           MOV    DPL,A
+0065 120000  R      LCALL  MV_PTR2C1?C
+0068 FD             MOV    R5,A
+0069 7C00           MOV    R4,#000H
+006B D007           POP    AR7
+006D D006           POP    AR6
+006F 120000  R      LCALL  ?C_IMUL
+0072 E500    R      MOV    A,sum+01H
+0074 2F             ADD    A,R7
+0075 F500    R      MOV    sum+01H,A
+0077 E500    R      MOV    A,sum
+0079 3E             ADDC   A,R6
+007A F500    R      MOV    sum,A
+                                           ; SOURCE LINE # 19 
+007C 0500    R      INC    l+01H
+007E E500    R      MOV    A,l+01H
+0080 7002           JNZ    ?LAB11
+0082 0500    R      INC    l
+0084         ?LAB11:
+0084 6402           XRL    A,#002H
+0086 4500    R      ORL    A,l
+0088 709F           JNZ    ?FOR7
+                                           ; SOURCE LINE # 17 
+008A 0500    R      INC    k+01H
+008C E500    R      MOV    A,k+01H
+008E 7002           JNZ    ?LAB12
+0090 0500    R      INC    k
+0092         ?LAB12:
+0092 6402           XRL    A,#002H
+0094 4500    R      ORL    A,k
+0096 708B           JNZ    ?FOR6
+                                           ; SOURCE LINE # 24 
+0098 AE00    R      MOV    R6,i
+009A AF00    R      MOV    R7,i+01H
+009C E4             CLR    A
+009D FC             MOV    R4,A
+009E 7D06           MOV    R5,#006H
+00A0 120000  R      LCALL  ?C_IMUL
+00A3 E500    R      MOV    A,dst+02H
+00A5 2F             ADD    A,R7
+00A6 FF             MOV    R7,A
+00A7 E500    R      MOV    A,dst+01H
+00A9 3E             ADDC   A,R6
+00AA FE             MOV    R6,A
+00AB EF             MOV    A,R7
+00AC 2500    R      ADD    A,j+01H
+00AE FC             MOV    R4,A
+00AF EE             MOV    A,R6
+RC51 COMPILER V06.14.12.087,  LAPLACIAN          07/13/24  18:47:01  PAGE  3
+
+00B0 3500    R      ADDC   A,j
+00B2 AB00    R      MOV    R3,dst
+00B4 FA             MOV    R2,A
+00B5 A904           MOV    R1,AR4
+00B7 E500    R      MOV    A,sum+01H
+00B9 120000  R      LCALL  XPGN1?C
+                                           ; SOURCE LINE # 14 
+00BC 0500    R      INC    j+01H
+00BE E500    R      MOV    A,j+01H
+00C0 B40502         CJNE   A,#005H,$ + 5
+00C3 8003           SJMP   $ + 5
+00C5 020000  R      LJMP   ?FOR5
+                                           ; SOURCE LINE # 12 
+00C8 0500    R      INC    i+01H
+00CA E500    R      MOV    A,i+01H
+00CC B40502         CJNE   A,#005H,$ + 5
+00CF 8003           SJMP   $ + 5
+00D1 020000  R      LJMP   ?FOR4
+                                           ; SOURCE LINE # 27 
+00D4 22             RET    
+
+            ; FUNCTION _applyLaplacian (END)
+
+RC51 COMPILER V06.14.12.087,  LAPLACIAN          07/13/24  18:47:01  PAGE  5
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    213    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+RC51 COMPILATION COMPLETE.  0 WARNING,  0 ERROR

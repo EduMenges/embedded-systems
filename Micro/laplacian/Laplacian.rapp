@@ -1,9 +1,9 @@
 
-<ApplicationBuild Header="Hash" Extern=".\Hash.rapp" Path=".\Hash.rapp" OutputFile=".\Hash.aof" sate="96" >
-	<NodeH Path=".\files\hash.h" Header="hash.h" Marker="-1" OutputFile="" sate="0" />
-	<NodeC Path=".\files\benchmark.c" Header="benchmark.c" Marker="-1" OutputFile=".\benchmark.obj" sate="2" />
+<ApplicationBuild Header="Laplacian" Extern=".\Laplacian.rapp" Path=".\Laplacian.rapp" OutputFile=".\Laplacian.aof" sate="98" >
+	<NodeC Path=".\files\benchmark.c" Header="benchmark.c" Marker="-1" OutputFile=".\benchmark.obj" sate="0" />
 	<NodeText Path=".\files\CMakeLists.txt" Header="CMakeLists.txt" Marker="-1" OutputFile="" sate="0" />
-	<NodeC Path=".\files\hash.c" Header="hash.c" Marker="-1" OutputFile=".\hash.obj" sate="0" />
+	<NodeC Path=".\files\laplacian.c" Header="laplacian.c" Marker="-1" OutputFile=".\laplacian.obj" sate="0" />
+	<NodeH Path=".\files\laplacian.h" Header="laplacian.h" Marker="-1" OutputFile="" sate="0" />
 	<Options>
 		<Config Header="Standard" >
 			<Set Header="ApplicationBuild" >

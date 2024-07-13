@@ -1,0 +1,63 @@
+<?xml version="1.0" ?>
+<Table>
+  <Row>
+    <Column>--</Column>
+    <Column>BENCHMARK</Column>
+    <Column>F:\MICRO\LAPLACIAN\BENCHMARK.OBJ</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>LAPLACIAN</Column>
+    <Column>F:\MICRO\LAPLACIAN\LAPLACIAN.OBJ</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>C1S</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>XPGN1</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>MV_PTR2C1</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>MULS</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>STRCPY</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>SHARING</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>HPD</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>_C_INITD</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>_C_IDATALEN</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+  <Row>
+    <Column>--</Column>
+    <Column>IPGN1</Column>
+    <Column>C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB</Column>
+  </Row>
+</Table>

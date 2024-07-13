@@ -1,4 +1,4 @@
 
 <Project Header="Project 'Hash'" Path=".\Hash.rprj" Project="Yes" OutputFile="" sate="96" ActiveApp="Hash" >
-	<ApplicationBuild Header="Hash" Extern=".\Hash.rapp" Path=".\Hash.rapp" OutputFile=".\Hash.aof" sate="98" />
+	<ApplicationBuild Header="Hash" Extern=".\Hash.rapp" Path=".\Hash.rapp" OutputFile=".\Hash.aof" sate="96" />
 </Project>
