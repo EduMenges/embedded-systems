@@ -91,12 +91,12 @@ void json_debug_print(typed(json_string) str, typed(size) len) {
  * @brief Parses a JSON element {json_element_t} and moves the string
  * pointer to the end of the parsed element
  */
-static result(json_entry) json_parse_entry(typed(json_string) *);
+static result(json_entry) json_parse_entry(json_string_t *);
 
 /**
  * @brief Guesses the element type at the start of a string
  */
-static result(json_element_type) json_guess_element_type(typed(json_string));
+static result(json_element_type) json_guess_element_type(json_string_t);
 
 /**
  * @brief Whether a token represents a string. Like '"'
@@ -134,39 +134,39 @@ static _bool json_is_null(char);
  * to end of the parsed element
  */
 static result(json_element_value)
-    json_parse_element_value(typed(json_string) *, typed(json_element_type));
+    json_parse_element_value(json_string_t *, json_element_type_t);
 
 /**
  * @brief Parses a `String` {json_string_t} and moves the string
  * pointer to the end of the parsed string
  */
-static result(json_element_value) json_parse_string(typed(json_string) *);
+static result(json_element_value) json_parse_string(json_string_t *);
 
 /**
  * @brief Parses a `Number` {json_number_t} and moves the string
  * pointer to the end of the parsed number
  */
-static result(json_element_value) json_parse_number(typed(json_string) *);
+static result(json_element_value) json_parse_number(json_string_t *);
 
 /**
  * @brief Parses a `Object` {json_object_t} and moves the string
  * pointer to the end of the parsed object
  */
-static result(json_element_value) json_parse_object(typed(json_string) *);
+static result(json_element_value) json_parse_object(json_string_t *);
 
-static typed(uint64) json_key_hash(typed(json_string));
+static uint64_t json_key_hash(json_string_t);
 
 /**
  * @brief Parses a `Array` {json_array_t} and moves the string
  * pointer to the end of the parsed array
  */
-static result(json_element_value) json_parse_array(typed(json_string) *);
+static result(json_element_value) json_parse_array(json_string_t *);
 
 /**
  * @brief Parses a `Boolean` {json_boolean_t} and moves the string
  * pointer to the end of the parsed boolean
  */
-static result(json_element_value) json_parse_boolean(typed(json_string) *);
+static result(json_element_value) json_parse_boolean(json_string_t *);
 
 /**
  * @brief Skips a Key-Value pair
@@ -174,7 +174,7 @@ static result(json_element_value) json_parse_boolean(typed(json_string) *);
  * @return true If a valid entry is skipped
  * @return false If entry was invalid (still skips)
  */
-static _bool json_skip_entry(typed(json_string) *);
+static _bool json_skip_entry(json_string_t *);
 
 /**
  * @brief Skips an element value
@@ -182,8 +182,8 @@ static _bool json_skip_entry(typed(json_string) *);
  * @return true If a valid element is skipped
  * @return false If element was invalid (still skips)
  */
-static _bool json_skip_element_value(typed(json_string) *,
-                                    typed(json_element_type));
+static _bool json_skip_element_value(json_string_t *,
+                                    json_element_type_t);
 
 /**
  * @brief Skips a string value
@@ -191,7 +191,7 @@ static _bool json_skip_element_value(typed(json_string) *,
  * @return true If a valid string is skipped
  * @return false If string was invalid (still skips)
  */
-static _bool json_skip_string(typed(json_string) *);
+static _bool json_skip_string(json_string_t *);
 
 /**
  * @brief Skips a number value
@@ -199,7 +199,7 @@ static _bool json_skip_string(typed(json_string) *);
  * @return true If a valid number is skipped
  * @return false If number was invalid (still skips)
  */
-static _bool json_skip_number(typed(json_string) *);
+static _bool json_skip_number(json_string_t *);
 
 /**
  * @brief Skips an object value
@@ -207,7 +207,7 @@ static _bool json_skip_number(typed(json_string) *);
  * @return true If a valid object is skipped
  * @return false If object was invalid (still skips)
  */
-static _bool json_skip_object(typed(json_string) *);
+static _bool json_skip_object(json_string_t *);
 
 /**
  * @brief Skips an array value
@@ -215,7 +215,7 @@ static _bool json_skip_object(typed(json_string) *);
  * @return true If a valid array is skipped
  * @return false If array was invalid (still skips)
  */
-static _bool json_skip_array(typed(json_string) *);
+static _bool json_skip_array(json_string_t *);
 
 /**
  * @brief Skips a boolean value
@@ -223,81 +223,81 @@ static _bool json_skip_array(typed(json_string) *);
  * @return true If a valid boolean is skipped
  * @return false If boolean was invalid (still skips)
  */
-static _bool json_skip_boolean(typed(json_string) *);
+static _bool json_skip_boolean(json_string_t *);
 
 /**
  * @brief Moves a JSON string pointer beyond any whitespace
  */
-// static void json_skip_whitespace_actual(typed(json_string) *);
+// static void json_skip_whitespace_actual(json_string_t *);
 
 /**
  * @brief Moves a JSON string pointer beyond `null` literal
  *
  */
-static void json_skip_null(typed(json_string) *);
+static void json_skip_null(json_string_t *);
 
 /**
  * @brief Prints a JSON element {json_element_t} type
  */
-static void json_print_element(typed(json_element) *, int, int);
+static void json_print_element(json_element_t *, int, int);
 
 /**
  * @brief Prints a `String` {json_string_t} type
  */
-static void json_print_string(typed(json_string));
+static void json_print_string(json_string_t);
 
 /**
  * @brief Prints a `Number` {json_number_t} type
  */
-static void json_print_number(typed(json_number));
+static void json_print_number(json_number_t);
 
 /**
  * @brief Prints an `Object` {json_object_t} type
  */
-static void json_print_object(typed(json_object) *, int, int);
+static void json_print_object(json_object_t *, int, int);
 
 /**
  * @brief Prints an `Array` {json_array_t} type
  */
-static void json_print_array(typed(json_array) *, int, int);
+static void json_print_array(json_array_t *, int, int);
 
 /**
  * @brief Prints a `Boolean` {json_boolean_t} type
  */
-static void json_print_boolean(typed(json_boolean));
+static void json_print_boolean(json_boolean_t);
 
 /**
  * @brief Frees a `String` (json_string_t) from memory
  */
-static void json_free_string(typed(json_string));
+static void json_free_string(json_string_t);
 
 /**
  * @brief Frees an `Object` (json_object_t) from memory
  */
-static void json_free_object(typed(json_object) *);
+static void json_free_object(json_object_t *);
 
 /**
  * @brief Frees an `Array` (json_array_t) from memory
  */
-static void json_free_array(typed(json_array) *);
+static void json_free_array(json_array_t *);
 
 /**
  * @brief Utility function to convert an escaped string to a formatted string
  */
 static result(json_string)
-    json_unescape_string(typed(json_string), typed(size));
+    json_unescape_string(json_string_t, size_t);
 
 /**
  * @brief Offset to the last `"` of a JSON string
  */
-static typed(size) json_string_len(typed(json_string));
+static size_t json_string_len(json_string_t);
 
-result(json_element) json_parse(typed(json_string) json_str) {
+result(json_element) json_parse(json_string_t json_str) {
   if (json_str == NULL) {
     return result_err(json_element)(JSON_ERROR_EMPTY);
   }
 
-  typed(size) len = strlen(json_str);
+  size_t len = strlen(json_str);
   if (len == 0) {
     return result_err(json_element)(JSON_ERROR_EMPTY);
   }
@@ -307,7 +307,7 @@ result(json_element) json_parse(typed(json_string) json_str) {
   result_try(json_element, json_element_value, value,
              json_parse_element_value(&json_str, type));
 
-  const typed(json_element) element = {
+  const json_element_t element = {
       .type = type,
       .value = value,
   };
@@ -315,7 +315,7 @@ result(json_element) json_parse(typed(json_string) json_str) {
   return result_ok(json_element)(element);
 }
 
-result(json_entry) json_parse_entry(typed(json_string) * str_ptr) {
+result(json_entry) json_parse_entry(json_string_t * str_ptr) {
   result_try(json_entry, json_element_value, key, json_parse_string(str_ptr));
   json_skip_whitespace(str_ptr);
 
@@ -329,7 +329,7 @@ result(json_entry) json_parse_entry(typed(json_string) * str_ptr) {
     free((void *)key.as_string);
     return result_map_err(json_entry, json_element_type, &type_result);
   }
-  typed(json_element_type) type =
+  json_element_type_t type =
       result_unwrap(json_element_type)(&type_result);
 
   result(json_element_value) value_result =
@@ -338,10 +338,10 @@ result(json_entry) json_parse_entry(typed(json_string) * str_ptr) {
     free((void *)key.as_string);
     return result_map_err(json_entry, json_element_value, &value_result);
   }
-  typed(json_element_value) value =
+  json_element_value_t value =
       result_unwrap(json_element_value)(&value_result);
 
-  typed(json_entry) entry = {
+  json_entry_t entry = {
       .key = key.as_string,
       .element =
           {
@@ -353,9 +353,9 @@ result(json_entry) json_parse_entry(typed(json_string) * str_ptr) {
   return result_ok(json_entry)(entry);
 }
 
-result(json_element_type) json_guess_element_type(typed(json_string) str) {
+result(json_element_type) json_guess_element_type(json_string_t str) {
   const char ch = *str;
-  typed(json_element_type) type;
+  json_element_type_t type;
 
   if (json_is_string(ch))
     type = JSON_ELEMENT_TYPE_STRING;
@@ -391,8 +391,8 @@ _bool json_is_boolean(char ch) { return ch == 't' || ch == 'f'; }
 _bool json_is_null(char ch) { return ch == 'n'; }
 
 result(json_element_value)
-    json_parse_element_value(typed(json_string) * str_ptr,
-                             typed(json_element_type) type) {
+    json_parse_element_value(json_string_t * str_ptr,
+                             json_element_type_t type) {
   switch (type) {
   case JSON_ELEMENT_TYPE_STRING:
     return json_parse_string(str_ptr);
@@ -412,11 +412,11 @@ result(json_element_value)
   }
 }
 
-result(json_element_value) json_parse_string(typed(json_string) * str_ptr) {
+result(json_element_value) json_parse_string(json_string_t * str_ptr) {
   // Skip the first '"' character
   (*str_ptr)++;
 
-  typed(size) len = json_string_len(*str_ptr);
+  size_t len = json_string_len(*str_ptr);
   if (len == 0) {
     // Skip the end quote
     (*str_ptr)++;
@@ -429,14 +429,14 @@ result(json_element_value) json_parse_string(typed(json_string) * str_ptr) {
   // Skip to beyond the string
   (*str_ptr) += len + 1;
 
-  typed(json_element_value) retval = {0};
+  json_element_value_t retval = {0};
   retval.as_string = output;
 
   return result_ok(json_element_value)(retval);
 }
 
-result(json_element_value) json_parse_number(typed(json_string) * str_ptr) {
-  typed(json_string) temp_str = *str_ptr;
+result(json_element_value) json_parse_number(json_string_t * str_ptr) {
+  json_string_t temp_str = *str_ptr;
   _bool has_decimal = _false;
 
   while (json_is_number(*temp_str)) {
@@ -447,8 +447,8 @@ result(json_element_value) json_parse_number(typed(json_string) * str_ptr) {
     temp_str++;
   }
 
-  typed(json_number) number = {0};
-  typed(json_number_value) val = {0};
+  json_number_t number = {0};
+  json_number_value_t val = {0};
 
   if (has_decimal) {
     errno = 0;
@@ -472,14 +472,14 @@ result(json_element_value) json_parse_number(typed(json_string) * str_ptr) {
       return result_err(json_element_value)(JSON_ERROR_INVALID_VALUE);
   }
 
-  typed(json_element_value) retval = {0};
+  json_element_value_t retval = {0};
   retval.as_number = number;
 
   return result_ok(json_element_value)(retval);
 }
 
-result(json_element_value) json_parse_object(typed(json_string) * str_ptr) {
-  typed(json_string) temp_str = *str_ptr;
+result(json_element_value) json_parse_object(json_string_t * str_ptr) {
+  json_string_t temp_str = *str_ptr;
 
   // ******* First find the number of valid entries *******
   // Skip the first '{' character
@@ -493,7 +493,7 @@ result(json_element_value) json_parse_object(typed(json_string) * str_ptr) {
     return result_err(json_element_value)(JSON_ERROR_EMPTY);
   }
 
-  typed(size) count = 0;
+  size_t count = 0;
 
   while (*temp_str != '\0') {
     // Skip any accidental whitespace
@@ -519,7 +519,7 @@ result(json_element_value) json_parse_object(typed(json_string) * str_ptr) {
 
   // ******* Initialize the hash map *******
   // Now we have a perfectly sized hash map
-  typed(json_entry) **entries = allocN(typed(json_entry) *, count);
+  json_entry_t **entries = allocN(json_entry_t *, count);
   size_t i;
   for (i = 0; i < count; i++)
     entries[i] = NULL;
@@ -535,16 +535,16 @@ result(json_element_value) json_parse_object(typed(json_string) * str_ptr) {
     result(json_entry) entry_result = json_parse_entry(str_ptr);
 
     if (result_is_ok(json_entry)(&entry_result)) {
-      typed(json_entry) entry = result_unwrap(json_entry)(&entry_result);
-      typed(uint64) bucket = json_key_hash(entry.key) % count;
+      json_entry_t entry = result_unwrap(json_entry)(&entry_result);
+      uint64_t bucket = json_key_hash(entry.key) % count;
 
       // Bucket size is exactly count. So there will be at max
       // count misses in the worst case
       size_t i;
       for (i = 0; i < count; i++) {
         if (entries[bucket] == NULL) {
-          typed(json_entry) *temp_entry = alloc(typed(json_entry));
-          memcpy(temp_entry, &entry, sizeof(typed(json_entry)));
+          json_entry_t *temp_entry = alloc(json_entry_t);
+          memcpy(temp_entry, &entry, sizeof(json_entry_t));
           entries[bucket] = temp_entry;
           break;
         }
@@ -566,18 +566,18 @@ result(json_element_value) json_parse_object(typed(json_string) * str_ptr) {
   // Skip the '}' closing brace
   (*str_ptr)++;
 
-  typed(json_object) *object = alloc(typed(json_object));
+  json_object_t *object = alloc(json_object_t);
   object->count = count;
   object->entries = entries;
 
-  typed(json_element_value) retval = {0};
+  json_element_value_t retval = {0};
   retval.as_object = object;
 
   return result_ok(json_element_value)(retval);
 }
 
-typed(uint64) json_key_hash(typed(json_string) str) {
-  typed(uint64) hash = 0;
+uint64_t json_key_hash(json_string_t str) {
+  uint64_t hash = 0;
 
   while (*str != '\0')
     hash += (hash * 31) + *str++;
@@ -585,7 +585,7 @@ typed(uint64) json_key_hash(typed(json_string) str) {
   return hash;
 }
 
-result(json_element_value) json_parse_array(typed(json_string) * str_ptr) {
+result(json_element_value) json_parse_array(json_string_t * str_ptr) {
   // Skip the starting '[' character
   (*str_ptr)++;
 
@@ -598,8 +598,8 @@ result(json_element_value) json_parse_array(typed(json_string) * str_ptr) {
     return result_err(json_element_value)(JSON_ERROR_EMPTY);
   }
 
-  typed(size) count = 0;
-  typed(json_element) *elements = NULL;
+  size_t count = 0;
+  json_element_t *elements = NULL;
 
   while (**str_ptr != '\0') {
     json_skip_whitespace(str_ptr);
@@ -607,18 +607,18 @@ result(json_element_value) json_parse_array(typed(json_string) * str_ptr) {
     // Guess the type
     result(json_element_type) type_result = json_guess_element_type(*str_ptr);
     if (result_is_ok(json_element_type)(&type_result)) {
-      typed(json_element_type) type =
+      json_element_type_t type =
           result_unwrap(json_element_type)(&type_result);
 
       // Parse the value based on guessed type
       result(json_element_value) value_result =
           json_parse_element_value(str_ptr, type);
       if (result_is_ok(json_element_value)(&value_result)) {
-        typed(json_element_value) value =
+        json_element_value_t value =
             result_unwrap(json_element_value)(&value_result);
 
         count++;
-        elements = reallocN(elements, typed(json_element), count);
+        elements = reallocN(elements, json_element_t, count);
         elements[count - 1].type = type;
         elements[count - 1].value = value;
       }
@@ -640,18 +640,18 @@ result(json_element_value) json_parse_array(typed(json_string) * str_ptr) {
   if (count == 0)
     return result_err(json_element_value)(JSON_ERROR_EMPTY);
 
-  typed(json_array) *array = alloc(typed(json_array));
+  json_array_t *array = alloc(json_array_t);
   array->count = count;
   array->elements = elements;
 
-  typed(json_element_value) retval = {0};
+  json_element_value_t retval = {0};
   retval.as_array = array;
 
   return result_ok(json_element_value)(retval);
 }
 
-result(json_element_value) json_parse_boolean(typed(json_string) * str_ptr) {
-  typed(json_boolean) output;
+result(json_element_value) json_parse_boolean(json_string_t * str_ptr) {
+  json_boolean_t output;
 
   switch (**str_ptr) {
   case 't':
@@ -665,24 +665,24 @@ result(json_element_value) json_parse_boolean(typed(json_string) * str_ptr) {
     break;
   }
   
-  typed(json_element_value) retval = {0};
+  json_element_value_t retval = {0};
   retval.as_boolean = output;
 
   return result_ok(json_element_value)(retval);
 }
 
 result(json_element)
-    json_object_find(typed(json_object) * obj, typed(json_string) key) {
+    json_object_find(json_object_t * obj, json_string_t key) {
   if (key == NULL || strlen(key) == 0)
     return result_err(json_element)(JSON_ERROR_INVALID_KEY);
 
-  typed(uint64) bucket = json_key_hash(key) % obj->count;
+  uint64_t bucket = json_key_hash(key) % obj->count;
 
   // Bucket size is exactly obj->count. So there will be at max
   // obj->count misses in the worst case
   size_t i;
   for (i = 0; i < obj->count; i++) {
-    typed(json_entry) *entry = obj->entries[bucket];
+    json_entry_t *entry = obj->entries[bucket];
     if (strcmp(key, entry->key) == 0)
       return result_ok(json_element)(entry->element);
 
@@ -692,7 +692,7 @@ result(json_element)
   return result_err(json_element)(JSON_ERROR_INVALID_KEY);
 }
 
-_bool json_skip_entry(typed(json_string) * str_ptr) {
+_bool json_skip_entry(json_string_t * str_ptr) {
   json_skip_string(str_ptr);
 
   json_skip_whitespace(str_ptr);
@@ -706,14 +706,14 @@ _bool json_skip_entry(typed(json_string) * str_ptr) {
   if (result_is_err(json_element_type)(&type_result))
     return _false;
 
-  typed(json_element_type) type =
+  json_element_type_t type =
       result_unwrap(json_element_type)(&type_result);
 
   return json_skip_element_value(str_ptr, type);
 }
 
-_bool json_skip_element_value(typed(json_string) * str_ptr,
-                             typed(json_element_type) type) {
+_bool json_skip_element_value(json_string_t * str_ptr,
+                             json_element_type_t type) {
   switch (type) {
   case JSON_ELEMENT_TYPE_STRING:
     return json_skip_string(str_ptr);
@@ -734,12 +734,12 @@ _bool json_skip_element_value(typed(json_string) * str_ptr,
   }
 }
 
-_bool json_skip_string(typed(json_string) * str_ptr) {
+_bool json_skip_string(json_string_t * str_ptr) {
   // Skip the initial '"'
   (*str_ptr)++;
 
   // Find the length till the last '"'
-  typed(size) len = json_string_len(*str_ptr);
+  size_t len = json_string_len(*str_ptr);
 
   // Skip till the end of the string
   (*str_ptr) += len + 1;
@@ -747,7 +747,7 @@ _bool json_skip_string(typed(json_string) * str_ptr) {
   return len > 0;
 }
 
-_bool json_skip_number(typed(json_string) * str_ptr) {
+_bool json_skip_number(json_string_t * str_ptr) {
   while (json_is_number(**str_ptr)) {
     (*str_ptr)++;
   }
@@ -755,7 +755,7 @@ _bool json_skip_number(typed(json_string) * str_ptr) {
   return _true;
 }
 
-_bool json_skip_object(typed(json_string) * str_ptr) {
+_bool json_skip_object(json_string_t * str_ptr) {
   // Skip the first '{' character
   (*str_ptr)++;
 
@@ -789,7 +789,7 @@ _bool json_skip_object(typed(json_string) * str_ptr) {
   return _true;
 }
 
-_bool json_skip_array(typed(json_string) * str_ptr) {
+_bool json_skip_array(json_string_t * str_ptr) {
   // Skip the starting '[' character
   (*str_ptr)++;
 
@@ -808,7 +808,7 @@ _bool json_skip_array(typed(json_string) * str_ptr) {
     // Guess the type
     result(json_element_type) type_result = json_guess_element_type(*str_ptr);
     if (result_is_ok(json_element_type)(&type_result)) {
-      typed(json_element_type) type =
+      json_element_type_t type =
           result_unwrap(json_element_type)(&type_result);
 
       // Parse the value based on guessed type
@@ -831,7 +831,7 @@ _bool json_skip_array(typed(json_string) * str_ptr) {
   return _true;
 }
 
-_bool json_skip_boolean(typed(json_string) * str_ptr) {
+_bool json_skip_boolean(json_string_t * str_ptr) {
   switch (**str_ptr) {
   case 't':
     (*str_ptr) += 4;
@@ -845,13 +845,13 @@ _bool json_skip_boolean(typed(json_string) * str_ptr) {
   return _false;
 }
 
-void json_skip_null(typed(json_string) * str_ptr) { (*str_ptr) += 4; }
+void json_skip_null(json_string_t * str_ptr) { (*str_ptr) += 4; }
 
-void json_print(typed(json_element) * element, int indent) {
+void json_print(json_element_t * element, int indent) {
   json_print_element(element, indent, 0);
 }
 
-void json_print_element(typed(json_element) * element, int indent,
+void json_print_element(json_element_t * element, int indent,
                         int indent_level) {
 
   switch (element->type) {
@@ -876,9 +876,9 @@ void json_print_element(typed(json_element) * element, int indent,
   }
 }
 
-void json_print_string(typed(json_string) string) { printf("\"%s\"", string); }
+void json_print_string(json_string_t string) { printf("\"%s\"", string); }
 
-void json_print_number(typed(json_number) number) {
+void json_print_number(json_number_t number) {
   switch (number.type) {
   case JSON_NUMBER_TYPE_DOUBLE:
     printf("%f", number.value.as_double);
@@ -890,7 +890,7 @@ void json_print_number(typed(json_number) number) {
   }
 }
 
-void json_print_object(typed(json_object) * object, int indent,
+void json_print_object(json_object_t * object, int indent,
                        int indent_level) {
   printf("{\n");
 
@@ -900,7 +900,7 @@ void json_print_object(typed(json_object) * object, int indent,
     for (j = 0; j < indent * (indent_level + 1); j++)
       printf(" ");
 
-    typed(json_entry) *entry = object->entries[i];
+    json_entry_t *entry = object->entries[i];
 
     json_print_string(entry->key);
     printf(": ");
@@ -917,13 +917,13 @@ void json_print_object(typed(json_object) * object, int indent,
   printf("}");
 }
 
-void json_print_array(typed(json_array) * array, int indent, int indent_level) {
+void json_print_array(json_array_t * array, int indent, int indent_level) {
   printf("[\n");
 
   {
 	  size_t i;
 	  for (i = 0; i < array->count; i++) {
-	    typed(json_element) element = array->elements[i];
+	    json_element_t element = array->elements[i];
 		int j;
 	    for (j = 0; j < indent * (indent_level + 1); j++)
 	      printf(" ");
@@ -941,11 +941,11 @@ void json_print_array(typed(json_array) * array, int indent, int indent_level) {
   printf("]");
 }
 
-void json_print_boolean(typed(json_boolean) boolean) {
+void json_print_boolean(json_boolean_t boolean) {
   printf("%s", boolean ? "true" : "false");
 }
 
-void json_free(typed(json_element) * element) {
+void json_free(json_element_t * element) {
   switch (element->type) {
   case JSON_ELEMENT_TYPE_STRING:
     json_free_string(element->value.as_string);
@@ -967,9 +967,9 @@ void json_free(typed(json_element) * element) {
   }
 }
 
-void json_free_string(typed(json_string) string) { free((void *)string); }
+void json_free_string(json_string_t string) { free((void *)string); }
 
-void json_free_object(typed(json_object) * object) {
+void json_free_object(json_object_t * object) {
   if (object == NULL)
     return;
 
@@ -980,7 +980,7 @@ void json_free_object(typed(json_object) * object) {
 
   size_t i;
   for (i = 0; i < object->count; i++) {
-    typed(json_entry) *entry = object->entries[i];
+    json_entry_t *entry = object->entries[i];
 
     if (entry != NULL) {
       free((void *)entry->key);
@@ -993,7 +993,7 @@ void json_free_object(typed(json_object) * object) {
   free(object);
 }
 
-void json_free_array(typed(json_array) * array) {
+void json_free_array(json_array_t * array) {
   if (array == NULL)
     return;
 
@@ -1005,7 +1005,7 @@ void json_free_array(typed(json_array) * array) {
   // Recursively free each element in the array
   size_t i;
   for (i = 0; i < array->count; i++) {
-    typed(json_element) element = array->elements[i];
+    json_element_t element = array->elements[i];
     json_free(&element);
   }
 
@@ -1014,7 +1014,7 @@ void json_free_array(typed(json_array) * array) {
   free(array);
 }
 
-typed(json_string) json_error_to_string(typed(json_error) error) {
+json_string_t json_error_to_string(json_error_t error) {
   switch (error) {
   case JSON_ERROR_EMPTY:
     return "Empty";
@@ -1030,10 +1030,10 @@ typed(json_string) json_error_to_string(typed(json_error) error) {
   }
 }
 
-typed(size) json_string_len(typed(json_string) str) {
-  typed(size) len = 0;
+size_t json_string_len(json_string_t str) {
+  size_t len = 0;
 
-  typed(json_string) iter = str;
+  json_string_t iter = str;
   while (*iter != '\0') {
     if (*iter == '\\')
       iter += 2;
@@ -1050,9 +1050,9 @@ typed(size) json_string_len(typed(json_string) str) {
 }
 
 result(json_string)
-    json_unescape_string(typed(json_string) str, typed(size) len) {
-  typed(size) count = 0;
-  typed(json_string) iter = str;
+    json_unescape_string(json_string_t str, size_t len) {
+  size_t count = 0;
+  json_string_t iter = str;
 
   while ((size_t)(iter - str) < len) {
     if (*iter == '\\')
@@ -1063,7 +1063,7 @@ result(json_string)
   }
 
   char *output = allocN(char, count + 1);
-  typed(size) offset = 0;
+  size_t offset = 0;
   iter = str;
 
   while ((size_t)(iter - str) < len) {
@@ -1104,7 +1104,7 @@ result(json_string)
   }
 
   output[offset] = '\0';
-  return result_ok(json_string)((typed(json_string))output);
+  return result_ok(json_string)((json_string_t)output);
 }
 
 define_result_type(json_element_type)
