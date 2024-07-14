@@ -41,7 +41,7 @@ int main(int argc, char **argv)
         file_name = default_file;
     }
 
-    const char *json = read_file("");
+    const char *json = read_file(file_name);
     if (json == NULL)
     {
         return -1;

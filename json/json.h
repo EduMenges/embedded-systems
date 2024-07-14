@@ -19,7 +19,7 @@ typedef short int int16_t;
 typedef int int32_t;
 typedef long long int int64_t;
 #else
-#include <stddint.h>
+#include <stdint.h>
 #endif
 
 #define typed(name) name##_t
