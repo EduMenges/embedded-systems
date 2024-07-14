@@ -1,3 +1,5 @@
+#ifndef HASH_H
+
 #include <stdint.h>
 #include <stddef.h>
 
@@ -9,3 +11,5 @@
  * @return uint32_t The hash of data
  */
 uint32_t hash(const void *data, size_t len, uint32_t seed);
+
+#endif
