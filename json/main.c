@@ -3,7 +3,7 @@
 #include <string.h>
 #include <time.h>
 
-#include "json.h"
+#include "./json.h"
 
 const char *read_file(const char *path) {
   FILE *file = fopen(path, "r");
@@ -24,7 +24,6 @@ const char *read_file(const char *path) {
 
   fread(buffer, 1, len, file);
   buffer[len] = '\0';
-
   return (const char *)buffer;
 }
 
@@ -50,4 +49,3 @@ int main(void) {
 
   return 0;
 }
-
