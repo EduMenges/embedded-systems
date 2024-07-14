@@ -1,4 +1,5 @@
-#pragma once
+#ifndef JSON
+#define JSON
 
 #include <stddef.h>
 
@@ -8,30 +9,29 @@ typedef unsigned int _bool;
 #define _false (0)
 #endif
 
-#define uint8_t unsigned char
-#define uint16_t unsigned short int
-#define uint32_t unsigned int
-#define uint64_t unsigned long long int
-#define int8_t char
-#define int16_t short int
-#define int32_t int
-#define int64_t long long int
-#define size_t unsigned char
+typedef unsigned char uint8_t;
+typedef unsigned short int uint16_t;
+typedef unsigned int uint32_t;
+typedef unsigned long long int uint64_t;
+typedef char int8_t;
+typedef short int int16_t;
+typedef int int32_t;
+typedef long long int int64_t;
 
 #define typed(name) name##_t
 
-typedef const char *typed(json_string);
-typedef _bool typed(json_boolean);
+typedef const char *json_string_t;
+typedef _bool json_boolean_t;
 
-typedef union json_number_value_u typed(json_number_value);
-typedef signed long typed(json_number_long);
-typedef double typed(json_number_double);
-typedef struct json_number_s typed(json_number);
-typedef union json_element_value_u typed(json_element_value);
-typedef struct json_element_s typed(json_element);
-typedef struct json_entry_s typed(json_entry);
-typedef struct json_object_s typed(json_object);
-typedef struct json_array_s typed(json_array);
+typedef union json_number_value_u json_number_value_t;
+typedef signed long json_number_long_t;
+typedef double json_number_double_t;
+typedef struct json_number_s json_number_t;
+typedef union json_element_value_u json_element_value_t;
+typedef struct json_element_s json_element_t;
+typedef struct json_entry_s json_entry_t;
+typedef struct json_object_s json_object_t;
+typedef struct json_array_s json_array_t;
 
 #define result(name) name##_result_t
 #define result_ok(name) name##_result_ok
@@ -69,49 +69,49 @@ typedef enum json_element_type_e {
   JSON_ELEMENT_TYPE_ARRAY,
   JSON_ELEMENT_TYPE_BOOLEAN,
   JSON_ELEMENT_TYPE_NULL
-} typed(json_element_type);
+} json_element_type_t;
 
 typedef enum json_number_type_e {
   JSON_NUMBER_TYPE_LONG = 0,
   JSON_NUMBER_TYPE_DOUBLE,
-} typed(json_number_type);
+} json_number_type_t;
 
 union json_number_value_u {
-  typed(json_number_long) as_long;
-  typed(json_number_double) as_double;
+  json_number_long_t as_long;
+  json_number_double_t as_double;
 };
 
 struct json_number_s {
-  typed(json_number_type) type;
-  typed(json_number_value) value;
+  json_number_type_t type;
+  json_number_value_t value;
 };
 
 union json_element_value_u {
-  typed(json_string) as_string;
-  typed(json_number) as_number;
-  typed(json_object) * as_object;
-  typed(json_array) * as_array;
-  typed(json_boolean) as_boolean;
+  json_string_t as_string;
+  json_number_t as_number;
+  json_object_t * as_object;
+  json_array_t * as_array;
+  json_boolean_t as_boolean;
 };
 
 struct json_element_s {
-  typed(json_element_type) type;
-  typed(json_element_value) value;
+  json_element_type_t type;
+  json_element_value_t value;
 };
 
 struct json_entry_s {
-  typed(json_string) key;
-  typed(json_element) element;
+  json_string_t key;
+  json_element_t element;
 };
 
 struct json_object_s {
-  typed(size) count;
-  typed(json_entry) * *entries;
+  size_t count;
+  json_entry_t * *entries;
 };
 
 struct json_array_s {
-  typed(size) count;
-  typed(json_element) * elements;
+  size_t count;
+  json_element_t * elements;
 };
 
 typedef enum json_error_e {
@@ -119,7 +119,7 @@ typedef enum json_error_e {
   JSON_ERROR_INVALID_TYPE,
   JSON_ERROR_INVALID_KEY,
   JSON_ERROR_INVALID_VALUE
-} typed(json_error);
+} json_error_t;
 
 declare_result_type(json_element_type)
 declare_result_type(json_element_value)
@@ -135,7 +135,7 @@ declare_result_type(size)
  * @param json_str The raw JSON string
  * @return The parsed {json_element_t} wrapped in a `result` type
  */
-result(json_element) json_parse(typed(json_string) json_str);
+result(json_element) json_parse(json_string_t json_str);
 
 /**
  * @brief Tries to get the element by key. If not found, returns
@@ -146,7 +146,7 @@ result(json_element) json_parse(typed(json_string) json_str);
  * @return Either a {json_element_t} or {json_error_t}
  */
 result(json_element)
-    json_object_find(typed(json_object) * object, typed(json_string) key);
+    json_object_find(json_object_t * object, json_string_t key);
 
 /**
  * @brief Prints a JSON element {json_element_t} with proper
@@ -154,14 +154,14 @@ result(json_element)
  *
  * @param indent The number of spaces to indent each level by
  */
-void json_print(typed(json_element) * element, int indent);
+void json_print(json_element_t * element, int indent);
 
 /**
  * @brief Frees a JSON element {json_element_t} from memory
  *
  * @param element The JSON element {json_element_t} to free
  */
-void json_free(typed(json_element) * element);
+void json_free(json_element_t * element);
 
 /**
  * @brief Returns a string representation of JSON error {json_error_t} type
@@ -169,5 +169,6 @@ void json_free(typed(json_element) * element);
  * @param error The JSON error enum {json_error_t} type
  * @return The string representation
  */
-typed(json_string) json_error_to_string(typed(json_error) error);
+json_string_t json_error_to_string(json_error_t error);
 
+#endif
