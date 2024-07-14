@@ -1,0 +1,146 @@
+LX51 CODE BANKING LINKER/LOCATOR V06.14.12.087                                 07/13/24  18:47:01
+MS-DOS LX51 CODE BANKING LINKER/LOCATOR V06.14.12.087,  INVOKED BY:
+C:\Arquivos de programas\Raisonance\Ride\Bin\LX51.EXE F:\Micro\laplacian\benchmark.obj,F:\Micro\l&
+aplacian\laplacian.obj TO(F:\Micro\laplacian\Laplacian.aof) LIBPATH(C:\Arquivos de programas\Rais&
+onance\Ride\Lib\51) GENERATEDEPFILE MAP IX RS(256) RSI(128) CSIZE(65536) XSIZE(65536) DEFN(XSTACK&
+LEN,256) DEFN(TIM1_INIT,E8h) CO(0) DT(0) ID(0) XD(0) BI(0) ABSCODEOFFS(0) XMLM(No,F:\Micro\laplac&
+ian\Laplacian-modules.Standard.xml) XMLF(No,8000,F:\Micro\laplacian\Laplacian-flash.Standard.xml)&
+ 
+
+
+MEMORY MODEL: SMALL WITHOUT ANY FLOATING POINT ARITHMETIC
+
+
+INPUT MODULES INCLUDED
+  F:\MICRO\LAPLACIAN\BENCHMARK.OBJ(BENCHMARK)
+  F:\MICRO\LAPLACIAN\LAPLACIAN.OBJ(LAPLACIAN)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(C1S)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(XPGN1)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(MV_PTR2C1)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(MULS)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(STRCPY)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(SHARING)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(HPD)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(_C_INITD)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(_C_IDATALEN)
+  C:\Arquivos de programas\Raisonance\Ride\Lib\51\RC51S.LIB(IPGN1)
+
+
+LINK MAP OF MODULE: F:\MICRO\LAPLACIAN\LAPLACIAN.AOF (LAPLACIAN)
+
+    TYPE     BASE       LENGTH    RELOCATION     SEGMENT NAME
+    ----     ----       ------    ----------     ------------
+
+    * * * * * * *   DATA/IDATA    M E M O R Y   * * * * * * *
+    REG      0000H      0008H     ABSOLUTE       "REG BANK 0"
+    DATA     0008H      0034H     OVERLAID UNIT  _DGROUP00_
+             0008H      0024H     -------------  ?DT?main?BENCHMARK
+             002CH      0010H     -------------  ?DT?_applyLaplacian?LAPLACIAN
+    DATA     003CH      0024H     UNIT           ?DT?BENCHMARK
+    DATA     0060H      0012H     UNIT           ?DT?LAPLACIAN
+    IDATA    0072H      0001H     * * STACK * *  _STACK
+
+    * * * * * * *   CODE          M E M O R Y   * * * * * * *
+    CODE     0000H      0003H     ABSOLUTE       
+    CODE     0003H      005BH     INBLOCK        ?PR?MOVES?LIB51
+    CODE     005EH      0184H     UNIT           ?PR?LIB51
+    CODE     01E2H      0066H     UNIT           ?PR?C51_STARTUP?
+    CODE     0248H      0024H     UNIT           ?STR?BENCHMARK
+    CODE     026CH      0023H     UNIT           ?PR?main?BENCHMARK
+    CODE     028FH      003BH     UNIT           _C_INITD?CD
+    CODE     02CAH      00D5H     UNIT           ?PR?_applyLaplacian?LAPLACIAN
+
+EXECUTABLE SUMMARY:
+-------------------
+    Total INTERNAL RAM storage requirement:  0072H (114)
+    Total EXTERNAL RAM storage requirement:  0000H (0)
+    Total     CODE     storage requirement:  039FH (927)
+Note:  Summary does not include dynamic stack requirements
+
+
+REFERENCE MAP OF MODULE: F:\MICRO\LAPLACIAN\LAPLACIAN.AOF (LAPLACIAN)
+
+SEGMENT                           BI_GROUP            DT_GROUP             ID_GROUP             XD_GROUP
+  +--> CALLED SEGMENT          START    LENGTH     START    LENGTH     START    LENGTH     START    LENGTH
+--------------------------------------------------------------------------------------
+
+?PR?main?BENCHMARK             ---------------     0008H    0024H      ---------------     ---------------
+  +--> ?PR?_applyLaplacian?LAPLACIAN
+
+?PR?_applyLaplacian?LAPLACIAN  ---------------     002CH    0010H     ---------------     ---------------
+
+SYMBOL TABLE FOR F:\MICRO\LAPLACIAN\LAPLACIAN.AOF(BENCHMARK)
+-------------------------------------------------------------
+
+    VALUE              TYPE               NAME
+    -----              ----               ----
+
+	-------            MODULE             benchmark
+	C:0000H            SYMBOL             _ICE_DUMMY_
+	C:026CH            PUBLIC             main
+	D:003CH            PUBLIC             source_image
+	-------            PROC               main
+	D:0008H            SYMBOL             dst
+	C:026CH            LINE#              11
+	C:026CH            LINE#              11
+	C:026CH            LINE#              12
+	C:027DH            LINE#              15
+	C:028BH            LINE#              17
+	C:028EH            LINE#              18
+	C:028EH            LINE#              18
+	-------            ENDPROC            main
+	-------            ENDMOD             benchmark
+	-------            MODULE             laplacian
+	C:0000H            SYMBOL             _ICE_DUMMY_
+	C:02CAH            PUBLIC             _applyLaplacian
+	-------            PROC               _applyLaplacian
+	D:002CH            SYMBOL             src
+	D:002FH            SYMBOL             dst
+	D:0060H            SYMBOL             kernel
+	D:0032H            SYMBOL             i
+	D:0034H            SYMBOL             j
+	D:0038H            SYMBOL             k
+	D:003AH            SYMBOL             l
+	D:0036H            SYMBOL             sum
+	C:02CAH            LINE#              4
+	C:02CAH            LINE#              4
+	C:02D6H            LINE#              12
+	C:02DCH            LINE#              14
+	C:02E2H            LINE#              16
+	C:02E7H            LINE#              17
+	C:02EDH            LINE#              19
+	C:02F3H            LINE#              21
+	C:0346H            LINE#              19
+	C:0354H            LINE#              17
+	C:0362H            LINE#              24
+	C:0386H            LINE#              14
+	C:0392H            LINE#              12
+	C:039EH            LINE#              27
+	C:039EH            LINE#              27
+	-------            ENDPROC            _applyLaplacian
+	-------            ENDMOD             laplacian
+	C:01E2H            PUBLIC             ?C_START1
+	C:0003H            PUBLIC             XPGN1?C
+	C:001FH            PUBLIC             MV_PTR2C1?C
+	C:005EH            PUBLIC             ?C_IMULX
+	C:0063H            PUBLIC             ?C_IMUL
+	C:007DH            PUBLIC             ?strcpy
+	C:007FH            PUBLIC             __STRCPY_NXT1__
+	C:0077H            PUBLIC             ?C_CPY
+	C:01DDH            PUBLIC             __NULL_POINTER__
+	C:01DAH            PUBLIC             __LOCAL_END__
+	D:00A0H            PUBLIC             HPD_ADDR
+	C:028FH            PUBLIC             ?C_INITSEGSTART
+	N:007FH            PUBLIC             IDATALEN
+	N:00FFH            PUBLIC             _INITP2?
+	C:0033H            PUBLIC             IPGN1?C
+
+----------------------
+SUGGESTED OPTIMIZATION
+----------------------
+Warning: 14 (EH) data bytes in the range [00H-80H] are available for storage.
+         Consider using some of these for 'data' variables in your source files.
+
+
+LINK/LOCATE RUN COMPLETE,  NO ERROR FOUND.
+

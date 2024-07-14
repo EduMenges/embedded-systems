@@ -1,0 +1,337 @@
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  1
+
+QCW(0x00002F32)
+
+DOS RC51 COMPILER V06.14.12.087, COMPILATION OF MODULE HASH      
+OBJECT MODULE PLACED IN F:\Micro\hash\hash.obj
+COMPILER INVOKED BY: QUIET GENERATEDEPFILE OJ(F:\Micro\hash\hash.obj) PIN(C:\Arq
+            -uivos de programas\Raisonance\Ride\Inc;C:\Arquivos de programas\Rai
+            -sonance\Ride\Inc\51) PIN(C:\Arquivos de programas\Raisonance\Ride\\
+            -C:\Arquivos de programas\Raisonance\Ride\\inc\51) NOAM CD PR(F:\Mic
+            -ro\hash\hash.lst) FP(NOFLOAT) IP NOIS UNSIGNEDCHAR ET(CHAR) PR PL(6
+            -0) PW(80) OE(1) OT(7,SPEED) RB(0) MAXERR(25) MAXWAR(25) SM MOD517(N
+            -ODP8,NOAU) 
+
+stmt level    source
+   1          #include "hash.h"
+   2          
+   3          uint32_t rotl32(uint32_t v, uint8_t n)
+   4          {
+   5   1          return (v << n) | (v >> ((-n) & 31));
+   6   1      }
+   7          
+   8          uint32_t rotr32(uint32_t v, uint8_t n)
+   9          {
+  10   1          return (v >> n) | (v << ((-n) & 31));
+  11   1      }
+  12          
+  13          uint32_t hash(void *d, size_t len, uint32_t seed)
+  14          {
+  15   1          uint32_t h1 = seed ^ 0x3b00;
+  16   1          uint32_t h2 = rotl32(seed, 15);
+  17   1      
+  18   1          uint8_t *p = d;
+  19   1          size_t i;
+  20   1          for (i = 0; i < len; ++i)
+  21   1          {
+  22   2              h1 += p[0];
+  23   2              h1 *= 9;
+  24   2              h2 += h1;
+  25   2              h2 = rotl32(h2, 7);
+  26   2              h2 *= 5;
+  27   2          }
+  28   1      
+  29   1          h1 ^= h2;
+  30   1          h1 += rotl32(h2, 14);
+  31   1          h2 ^= h1;
+  32   1          h2 += rotr32(h1, 6);
+  33   1          h1 ^= h2;
+  34   1          h1 += rotl32(h2, 5);
+  35   1          h2 ^= h1;
+  36   1          h2 += rotr32(h1, 8);
+  37   1      
+  38   1          return h2;
+  39   1      }
+  40          
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  6
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+            ; FUNCTION _rotl32 (BEGIN)
+              ; Register R6R7 is assigned to parameter v
+              ; Register R5 is assigned to parameter n
+                                           ; SOURCE LINE # 5 
+0000 ED             MOV    A,R5
+0001 F4             CPL    A
+0002 04             INC    A
+0003 541F           ANL    A,#01FH
+0005 8F03           MOV    AR3,R7
+0007 F8             MOV    R0,A
+0008 08             INC    R0
+0009 EE             MOV    A,R6
+000A 8005           SJMP   ?LAB5
+000C         ?LAB6:
+000C C3             CLR    C
+000D 13             RRC    A
+000E CB             XCH    A,R3
+000F 13             RRC    A
+0010 CB             XCH    A,R3
+0011         ?LAB5:
+0011 D8F9           DJNZ   R0,?LAB6
+0013 FA             MOV    R2,A
+0014 C002           PUSH   AR2
+0016 C003           PUSH   AR3
+0018 8F03           MOV    AR3,R7
+001A EB             MOV    A,R3
+001B 8E02           MOV    AR2,R6
+001D 8D04           MOV    AR4,R5
+001F 0C             INC    R4
+0020 8005           SJMP   ?LAB7
+0022         ?LAB8:
+0022 C3             CLR    C
+0023 33             RLC    A
+0024 CA             XCH    A,R2
+0025 33             RLC    A
+0026 CA             XCH    A,R2
+0027         ?LAB7:
+0027 DCF9           DJNZ   R4,?LAB8
+0029 FB             MOV    R3,A
+002A D0E0           POP    ACC
+002C 4B             ORL    A,R3
+002D FF             MOV    R7,A
+002E D0E0           POP    ACC
+0030 4A             ORL    A,R2
+0031 FE             MOV    R6,A
+                                           ; SOURCE LINE # 6 
+0032 22             RET    
+
+            ; FUNCTION _rotl32 (END)
+
+            ; FUNCTION _rotr32 (BEGIN)
+              ; Register R6R7 is assigned to parameter v
+              ; Register R5 is assigned to parameter n
+                                           ; SOURCE LINE # 10 
+0000 ED             MOV    A,R5
+0001 F4             CPL    A
+0002 04             INC    A
+0003 541F           ANL    A,#01FH
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  2
+
+0005 8E02           MOV    AR2,R6
+0007 F8             MOV    R0,A
+0008 08             INC    R0
+0009 EF             MOV    A,R7
+000A 8005           SJMP   ?LAB15
+000C         ?LAB16:
+000C C3             CLR    C
+000D 33             RLC    A
+000E CA             XCH    A,R2
+000F 33             RLC    A
+0010 CA             XCH    A,R2
+0011         ?LAB15:
+0011 D8F9           DJNZ   R0,?LAB16
+0013 FB             MOV    R3,A
+0014 C002           PUSH   AR2
+0016 C003           PUSH   AR3
+0018 8F03           MOV    AR3,R7
+001A 8E02           MOV    AR2,R6
+001C EA             MOV    A,R2
+001D 8D04           MOV    AR4,R5
+001F 0C             INC    R4
+0020 8005           SJMP   ?LAB17
+0022         ?LAB18:
+0022 C3             CLR    C
+0023 13             RRC    A
+0024 CB             XCH    A,R3
+0025 13             RRC    A
+0026 CB             XCH    A,R3
+0027         ?LAB17:
+0027 DCF9           DJNZ   R4,?LAB18
+0029 FA             MOV    R2,A
+002A D0E0           POP    ACC
+002C 4B             ORL    A,R3
+002D FF             MOV    R7,A
+002E D0E0           POP    ACC
+0030 4A             ORL    A,R2
+0031 FE             MOV    R6,A
+                                           ; SOURCE LINE # 11 
+0032 22             RET    
+
+            ; FUNCTION _rotr32 (END)
+
+            ; FUNCTION _hash (BEGIN)
+                                           ; SOURCE LINE # 13 
+0000 8B00    R      MOV    d,R3
+0002 8A00    R      MOV    d+01H,R2
+0004 8900    R      MOV    d+02H,R1
+0006 8D00    R      MOV    len,R5
+                                           ; SOURCE LINE # 15 
+0008 E500    R      MOV    A,seed
+000A 643B           XRL    A,#03BH
+000C F500    R      MOV    h1,A
+000E 850000  R      MOV    h1+01H,seed+01H
+                                           ; SOURCE LINE # 16 
+0011 AE00    R      MOV    R6,seed
+0013 AF00    R      MOV    R7,seed+01H
+0015 7D0F           MOV    R5,#00FH
+0017 120000  R      LCALL  _rotl32
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  3
+
+001A 8E00    R      MOV    h2,R6
+001C 8F00    R      MOV    h2+01H,R7
+                                           ; SOURCE LINE # 18 
+001E 850000  R      MOV    p,d
+0021 850000  R      MOV    p+01H,d+01H
+0024 850000  R      MOV    p+02H,d+02H
+                                           ; SOURCE LINE # 20 
+0027 750000  R      MOV    i,#000H
+002A         ?FOR1:
+002A E500    R      MOV    A,i
+002C B50000  R      CJNE   A,len,?LAB23
+002F         ?LAB23:
+002F 504B           JNC    ?NXT2
+                                           ; SOURCE LINE # 22 
+0031 AB00    R      MOV    R3,p
+0033 AA00    R      MOV    R2,p+01H
+0035 A900    R      MOV    R1,p+02H
+0037 120000  R      LCALL  IPGN1?C
+003A FB             MOV    R3,A
+003B E500    R      MOV    A,h1+01H
+003D 2B             ADD    A,R3
+003E F500    R      MOV    h1+01H,A
+0040 E4             CLR    A
+0041 3500    R      ADDC   A,h1
+0043 F500    R      MOV    h1,A
+                                           ; SOURCE LINE # 23 
+0045 AE00    R      MOV    R6,h1
+0047 AF00    R      MOV    R7,h1+01H
+0049 E4             CLR    A
+004A FC             MOV    R4,A
+004B 7D09           MOV    R5,#009H
+004D 120000  R      LCALL  ?C_IMUL
+0050 8E00    R      MOV    h1,R6
+0052 8F00    R      MOV    h1+01H,R7
+                                           ; SOURCE LINE # 24 
+0054 E500    R      MOV    A,h2+01H
+0056 2500    R      ADD    A,h1+01H
+0058 F500    R      MOV    h2+01H,A
+005A E500    R      MOV    A,h2
+005C 3500    R      ADDC   A,h1
+005E F500    R      MOV    h2,A
+                                           ; SOURCE LINE # 25 
+0060 AE00    R      MOV    R6,h2
+0062 AF00    R      MOV    R7,h2+01H
+0064 7D07           MOV    R5,#007H
+0066 120000  R      LCALL  _rotl32
+0069 8E00    R      MOV    h2,R6
+006B 8F00    R      MOV    h2+01H,R7
+                                           ; SOURCE LINE # 26 
+006D E4             CLR    A
+006E FC             MOV    R4,A
+006F 7D05           MOV    R5,#005H
+0071 120000  R      LCALL  ?C_IMUL
+0074 8E00    R      MOV    h2,R6
+0076 8F00    R      MOV    h2+01H,R7
+                                           ; SOURCE LINE # 20 
+0078 0500    R      INC    i
+007A 80AE           SJMP   ?FOR1
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  4
+
+007C         ?NXT2:
+                                           ; SOURCE LINE # 29 
+007C E500    R      MOV    A,h1+01H
+007E 6500    R      XRL    A,h2+01H
+0080 F500    R      MOV    h1+01H,A
+0082 E500    R      MOV    A,h1
+0084 6500    R      XRL    A,h2
+0086 F500    R      MOV    h1,A
+                                           ; SOURCE LINE # 30 
+0088 AE00    R      MOV    R6,h2
+008A AF00    R      MOV    R7,h2+01H
+008C 7D0E           MOV    R5,#00EH
+008E 120000  R      LCALL  _rotl32
+0091 E500    R      MOV    A,h1+01H
+0093 2F             ADD    A,R7
+0094 F500    R      MOV    h1+01H,A
+0096 E500    R      MOV    A,h1
+0098 3E             ADDC   A,R6
+0099 F500    R      MOV    h1,A
+                                           ; SOURCE LINE # 31 
+009B E500    R      MOV    A,h2+01H
+009D 6500    R      XRL    A,h1+01H
+009F F500    R      MOV    h2+01H,A
+00A1 E500    R      MOV    A,h2
+00A3 6500    R      XRL    A,h1
+00A5 F500    R      MOV    h2,A
+                                           ; SOURCE LINE # 32 
+00A7 AE00    R      MOV    R6,h1
+00A9 AF00    R      MOV    R7,h1+01H
+00AB 7D06           MOV    R5,#006H
+00AD 120000  R      LCALL  _rotr32
+00B0 E500    R      MOV    A,h2+01H
+00B2 2F             ADD    A,R7
+00B3 F500    R      MOV    h2+01H,A
+00B5 E500    R      MOV    A,h2
+00B7 3E             ADDC   A,R6
+00B8 F500    R      MOV    h2,A
+                                           ; SOURCE LINE # 33 
+00BA E500    R      MOV    A,h1+01H
+00BC 6500    R      XRL    A,h2+01H
+00BE F500    R      MOV    h1+01H,A
+00C0 E500    R      MOV    A,h1
+00C2 6500    R      XRL    A,h2
+00C4 F500    R      MOV    h1,A
+                                           ; SOURCE LINE # 34 
+00C6 AE00    R      MOV    R6,h2
+00C8 AF00    R      MOV    R7,h2+01H
+00CA 1D             DEC    R5
+00CB 120000  R      LCALL  _rotl32
+00CE E500    R      MOV    A,h1+01H
+00D0 2F             ADD    A,R7
+00D1 F500    R      MOV    h1+01H,A
+00D3 E500    R      MOV    A,h1
+00D5 3E             ADDC   A,R6
+00D6 F500    R      MOV    h1,A
+                                           ; SOURCE LINE # 35 
+00D8 E500    R      MOV    A,h2+01H
+00DA 6500    R      XRL    A,h1+01H
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  5
+
+00DC F500    R      MOV    h2+01H,A
+00DE E500    R      MOV    A,h2
+00E0 6500    R      XRL    A,h1
+00E2 F500    R      MOV    h2,A
+                                           ; SOURCE LINE # 36 
+00E4 AE00    R      MOV    R6,h1
+00E6 AF00    R      MOV    R7,h1+01H
+00E8 7D08           MOV    R5,#008H
+00EA 120000  R      LCALL  _rotr32
+00ED E500    R      MOV    A,h2+01H
+00EF 2F             ADD    A,R7
+00F0 F500    R      MOV    h2+01H,A
+00F2 E500    R      MOV    A,h2
+00F4 3E             ADDC   A,R6
+00F5 F500    R      MOV    h2,A
+                                           ; SOURCE LINE # 38 
+00F7 AE00    R      MOV    R6,h2
+00F9 AF00    R      MOV    R7,h2+01H
+                                           ; SOURCE LINE # 39 
+00FB 22             RET    
+
+            ; FUNCTION _hash (END)
+
+RC51 COMPILER V06.14.12.087,  HASH               07/13/24  18:09:09  PAGE  7
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    354    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----      10
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+RC51 COMPILATION COMPLETE.  0 WARNING,  0 ERROR

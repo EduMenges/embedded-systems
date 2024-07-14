@@ -1,0 +1,29 @@
+MS-DOS LX51 CODE BANKING LINKER/LOCATOR V06.14.12.087
+
+
+INTER-MODULE CROSS-REFERENCE LISTING
+------------------------------------
+
+          NAME. . . . . . . . USAGE   MODULE NAMES
+          ----------------------------------------
+          ?C_CPY  . . . . . . CODE    [STRCPY]:  BENCHMARK
+          ?C_IMUL . . . . . . CODE    [MULS]:  LAPLACIAN
+          ?C_IMULX  . . . . . CODE    [MULS]: 
+          ?C_INITSEGSTART . . CODE    [_C_INITD]:  C1S
+          ?C_START1 . . . . . CODE    [C1S]:  BENCHMARK
+          ?strcpy . . . . . . CODE    [STRCPY]: 
+          HPD_ADDR  . . . . . DATA    [HPD]:  C1S
+          IDATALEN  . . . . . NUMBER  [_C_IDATALEN]:  C1S
+          IPGN1?C . . . . . . CODE    [IPGN1]:  MV_PTR2C1
+          main  . . . . . . . CODE    [BENCHMARK]:  C1S
+          MV_PTR2C1?C . . . . CODE    [MV_PTR2C1]:  LAPLACIAN
+          source_image  . . . DATA    [BENCHMARK]: 
+          TIM1_INIT . . . . . NUMBER  [** UNRESOLVED **]:
+          XPGN1?C . . . . . . CODE    [XPGN1]:  LAPLACIAN
+          XSTACKLEN . . . . . NUMBER  [** UNRESOLVED **]:
+          _applyLaplacian . . CODE    [LAPLACIAN]:  BENCHMARK
+          _INITP2?  . . . . . NUMBER  [_C_IDATALEN]:  C1S
+          _STACK  . . . . . . IDATA   [BENCHMARK]:  C1S
+          __LOCAL_END__ . . . CODE    [SHARING]:  STRCPY
+          __NULL_POINTER__  . CODE    [SHARING]:  STRCPY
+          __STRCPY_NXT1__ . . CODE    [STRCPY]: 

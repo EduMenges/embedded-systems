@@ -1,0 +1,67 @@
+RC51 COMPILER V06.14.12.087,  BENCHMARK          07/13/24  18:09:31  PAGE  1
+
+QCW(0x00002F32)
+
+DOS RC51 COMPILER V06.14.12.087, COMPILATION OF MODULE BENCHMARK 
+OBJECT MODULE PLACED IN F:\Micro\hash\benchmark.obj
+COMPILER INVOKED BY: QUIET GENERATEDEPFILE OJ(F:\Micro\hash\benchmark.obj) PIN(C
+            -:\Arquivos de programas\Raisonance\Ride\Inc;C:\Arquivos de programa
+            -s\Raisonance\Ride\Inc\51) PIN(C:\Arquivos de programas\Raisonance\R
+            -ide\\C:\Arquivos de programas\Raisonance\Ride\\inc\51) NOAM CD PR(F
+            -:\Micro\hash\benchmark.lst) FP(NOFLOAT) IP NOIS UNSIGNEDCHAR ET(CHA
+            -R) PR PL(60) PW(80) OE(1) OT(7,SPEED) RB(0) MAXERR(25) MAXWAR(25) S
+            -M MOD517(NODP8,NOAU) 
+
+stmt level    source
+   1          #include "hash.h"
+   2          
+   3          uint64_t dummy[] = {0, 1, 2, 3, 4, 5, 6, 7};
+
+*** WARNING C021 IN LINE 3 OF F:\Micro\hash\files\benchmark.c : Type is defined
+            - more than once
+   4          
+   5          int main()
+   6          {
+   7   1          hash(dummy, sizeof(dummy), 0);
+   8   1      
+   9   1          return 0;
+  10   1      }
+  11          
+RC51 COMPILER V06.14.12.087,  BENCHMARK          07/13/24  18:09:31  PAGE  2
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+            ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 7 
+0000 E4             CLR    A
+0001 F500    R      MOV    ?_hash?BYTE,A
+0003 F500    R      MOV    ?_hash?BYTE+01H,A
+0005 7B01           MOV    R3,#001H
+0007 FA             MOV    R2,A
+0008 7900    R      MOV    R1,#dummy
+000A 7D20           MOV    R5,#020H
+000C 120000  R      LCALL  _hash
+                                           ; SOURCE LINE # 9 
+000F E4             CLR    A
+0010 FE             MOV    R6,A
+0011 FF             MOV    R7,A
+                                           ; SOURCE LINE # 10 
+0012 22             RET    
+
+            ; FUNCTION main (END)
+
+RC51 COMPILER V06.14.12.087,  BENCHMARK          07/13/24  18:09:31  PAGE  3
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     19    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     32    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+RC51 COMPILATION COMPLETE.  1 WARNING,  0 ERROR

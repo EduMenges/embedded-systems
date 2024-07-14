@@ -1,0 +1,83 @@
+RC51 COMPILER V06.14.12.087,  BENCHMARK          07/13/24  18:47:01  PAGE  1
+
+QCW(0x00002F32)
+
+DOS RC51 COMPILER V06.14.12.087, COMPILATION OF MODULE BENCHMARK 
+OBJECT MODULE PLACED IN F:\Micro\laplacian\benchmark.obj
+COMPILER INVOKED BY: QUIET GENERATEDEPFILE OJ(F:\Micro\laplacian\benchmark.obj) 
+            -PIN(C:\Arquivos de programas\Raisonance\Ride\Inc;C:\Arquivos de pro
+            -gramas\Raisonance\Ride\Inc\51) PIN(C:\Arquivos de programas\Raisona
+            -nce\Ride\\C:\Arquivos de programas\Raisonance\Ride\\inc\51) NOAM CD
+            - PR(F:\Micro\laplacian\benchmark.lst) FP(NOFLOAT) IP NOIS UNSIGNEDC
+            -HAR ET(CHAR) PR PL(60) PW(80) OE(1) OT(7,SPEED) RB(0) MAXERR(25) MA
+            -XWAR(25) SM MOD517(NODP8,NOAU) 
+
+stmt level    source
+   1          #include "./laplacian.h"
+   2          
+   3          unsigned char source_image[6][6] = {
+   4              {236,150,124,208,255,255},
+   5              {173,65,65,113,242,255},
+   6              {156,62,59,54,123,210},
+   7              {202,78,50,51,55,123},
+   8              {133,72,55,68,86,157},
+   9              {145,163,160,171,199,232},
+  10          };
+  11          int main() {
+  12   1          char dst[IMAGE_HEIGHT][IMAGE_WIDTH] = {0};
+  13   1      
+  14   1          // Initialize the source image
+  15   1          applyLaplacian(source_image, dst);
+  16   1      
+  17   1          return 0;
+  18   1      }
+  19          
+  20          
+RC51 COMPILER V06.14.12.087,  BENCHMARK          07/13/24  18:47:01  PAGE  2
+
+ASSEMBLY LISTING OF GENERATED OBJECT CODE
+
+            ; FUNCTION main (BEGIN)
+                                           ; SOURCE LINE # 12 
+0000 7D05           MOV    R5,#005H
+0002 7C00    R      MOV    R4,#HIGH(?STR?BENCHMARK?BASE)
+0004 7800    R      MOV    R0,#LOW(?STR?BENCHMARK?BASE)
+0006 7B01           MOV    R3,#001H
+0008 E4             CLR    A
+0009 FA             MOV    R2,A
+000A 7900    R      MOV    R1,#dst
+000C 7E24           MOV    R6,#024H
+000E 120000  R      LCALL  ?C_CPY
+                                           ; SOURCE LINE # 15 
+0011 7B01           MOV    R3,#001H
+0013 7900    R      MOV    R1,#source_image
+0015 E4             CLR    A
+0016 FA             MOV    R2,A
+0017 FC             MOV    R4,A
+0018 7D01           MOV    R5,#001H
+001A 7800    R      MOV    R0,#dst
+001C 120000  R      LCALL  _applyLaplacian
+                                           ; SOURCE LINE # 17 
+001F E4             CLR    A
+0020 FE             MOV    R6,A
+0021 FF             MOV    R7,A
+                                           ; SOURCE LINE # 18 
+0022 22             RET    
+
+            ; FUNCTION main (END)
+
+RC51 COMPILER V06.14.12.087,  BENCHMARK          07/13/24  18:47:01  PAGE  3
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     35    ----
+   CONSTANT SIZE    =     36    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     36      36
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+RC51 COMPILATION COMPLETE.  0 WARNING,  0 ERROR

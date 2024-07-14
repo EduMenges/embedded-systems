@@ -1,0 +1,4 @@
+
+<Project Header="Project 'Laplacian'" Path=".\Laplacian.rprj" Project="Yes" OutputFile="" sate="96" ActiveApp="Laplacian" >
+	<ApplicationBuild Header="Laplacian" Extern=".\Laplacian.rapp" Path=".\Laplacian.rapp" OutputFile=".\Laplacian.aof" sate="98" />
+</Project>
