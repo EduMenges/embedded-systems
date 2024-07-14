@@ -27,25 +27,40 @@ const char *read_file(const char *path) {
   return (const char *)buffer;
 }
 
-int main(void) {
-  const char *json = read_file("..\\multidim_arr.json");
-  if (json == NULL) {
-    return -1;
-  }
+static const char *default_file = "..\\multidim_arr.json";
 
-  result(json_element) element_result = json_parse(json);
+int main(int argc, char **argv)
+{
+    const char *file_name;
+    if (argc > 0)
+    {
+        file_name = argv[1];
+    }
+    else
+    {
+        file_name = default_file;
+    }
 
-  free((void *)json);
+    const char *json = read_file("");
+    if (json == NULL)
+    {
+        return -1;
+    }
 
-  if (result_is_err(json_element)(&element_result)) {
-    typed(json_error) error = result_unwrap_err(json_element)(&element_result);
-    fprintf(stderr, "Error parsing JSON: %s\n", json_error_to_string(error));
-    return -1;
-  }
-  typed(json_element) element = result_unwrap(json_element)(&element_result);
+    result(json_element) element_result = json_parse(json);
 
-  // json_print(&element, 2);
-  json_free(&element);
+    free((void *)json);
 
-  return 0;
+    if (result_is_err(json_element)(&element_result))
+    {
+        typed(json_error) error = result_unwrap_err(json_element)(&element_result);
+        fprintf(stderr, "Error parsing JSON: %s\n", json_error_to_string(error));
+        return -1;
+    }
+    typed(json_element) element = result_unwrap(json_element)(&element_result);
+
+    // json_print(&element, 2);
+    json_free(&element);
+
+    return 0;
 }
