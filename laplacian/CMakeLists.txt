@@ -1,3 +1,3 @@
 add_library(laplacian STATIC laplacian.c)
-add_executable(benchmark benchmark.c)
-target_link_libraries(benchmark PRIVATE hash)
+add_executable(laplacian_benchmark benchmark.c)
+target_link_libraries(laplacian_benchmark PRIVATE laplacian)
